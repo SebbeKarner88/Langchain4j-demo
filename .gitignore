@@ -44,3 +44,10 @@ out/
 storage/
 
 src/main/frontend/generated/
+
+# Environment variables
+.env
+*.env
+.env.local
+.env.*
+!.env.example
