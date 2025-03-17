@@ -27,10 +27,7 @@ public class LangChain4jConfig {
 
 
     @Bean
-    ContentRetriever contentRetriever(
-            EmbeddingStore<TextSegment> embeddingStore,
-            EmbeddingModel embeddingModel
-    ) {
+    ContentRetriever contentRetriever(EmbeddingStore<TextSegment> embeddingStore, EmbeddingModel embeddingModel) {
         return EmbeddingStoreContentRetriever.builder()
                 .embeddingStore(embeddingStore)
                 .embeddingModel(embeddingModel)
