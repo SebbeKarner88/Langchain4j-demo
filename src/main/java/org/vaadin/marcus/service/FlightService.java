@@ -1,8 +1,13 @@
 package org.vaadin.marcus.service;
 
+import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.vaadin.marcus.data.*;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,5 +107,29 @@ public class FlightService {
                 booking.getTo(),
                 booking.getBookingClass().toString()
         );
+    }
+
+    public static String getAdvice() {
+        String apiUrl = "https://api.adviceslip.com/advice";
+        try {
+            URL url = new URL(apiUrl);
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            StringBuilder response = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+
+            // Parse JSON response
+            JSONObject jsonResponse = new JSONObject(response.toString());
+            return jsonResponse.getJSONObject("slip").getString("advice");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "Failed to fetch advice.";
+        }
     }
 }

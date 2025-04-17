@@ -15,6 +15,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class LangChain4jConfig {
 
+
+    // Provides memory to chat.
     @Bean
     ChatMemoryProvider chatMemoryProvider(Tokenizer tokenizer) {
         return chatId -> TokenWindowChatMemory.withMaxTokens(1000, tokenizer);
@@ -27,7 +29,8 @@ public class LangChain4jConfig {
 
 
     @Bean
-    ContentRetriever contentRetriever(EmbeddingStore<TextSegment> embeddingStore, EmbeddingModel embeddingModel) {
+    ContentRetriever contentRetriever(EmbeddingStore<TextSegment> embeddingStore,
+                                      EmbeddingModel embeddingModel) {
         return EmbeddingStoreContentRetriever.builder()
                 .embeddingStore(embeddingStore)
                 .embeddingModel(embeddingModel)

@@ -9,7 +9,7 @@ import org.vaadin.marcus.service.FlightService;
 import java.time.LocalDate;
 
 @Component
-public class LangChain4jTools {
+public class  LangChain4jTools {
 
     private final FlightService service;
 
@@ -26,6 +26,13 @@ public class LangChain4jTools {
     }
 
     @Tool("""
+            Retrieves a good advice
+            """)
+    public String getAdvice() {
+        return service.getAdvice();
+    }
+
+    @Tool(""" 
             Modifies an existing booking.
             This includes making changes to the flight date, and the departure and arrival airports.
             """)
