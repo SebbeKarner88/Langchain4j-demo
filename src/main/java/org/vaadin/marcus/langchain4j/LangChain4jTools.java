@@ -1,55 +1,57 @@
 package org.vaadin.marcus.langchain4j;
 
-import dev.langchain4j.agent.tool.P;
 import dev.langchain4j.agent.tool.Tool;
 import org.springframework.stereotype.Component;
-import org.vaadin.marcus.service.BookingDetails;
-import org.vaadin.marcus.service.FlightService;
-
-import java.time.LocalDate;
+import org.vaadin.marcus.service.ToolService;
 
 @Component
 public class  LangChain4jTools {
-
-    private final FlightService service;
-
-    public LangChain4jTools(FlightService service) {
-        this.service = service;
-    }
-
-    @Tool("""
-            Retrieves information about an existing booking,
-            such as the flight date, booking status, departure and arrival airports, and booking class.
-            """)
-    public BookingDetails getBookingDetails(String bookingNumber, String firstName, String lastName) {
-        return service.getBookingDetails(bookingNumber, firstName, lastName);
-    }
 
     @Tool("""
             Retrieves a good advice
             """)
     public String getAdvice() {
-        return service.getAdvice();
+        return ToolService.getAdvice();
     }
 
-    @Tool(""" 
-            Modifies an existing booking.
-            This includes making changes to the flight date, and the departure and arrival airports.
+    @Tool("""
+            Retrieves a random joke. The jokes are family-friendly and avoid sensitive topics.
             """)
-    public void changeBooking(
-        String bookingNumber,
-        String firstName,
-        String lastName,
-        LocalDate newFlightDate,
-        @P("3-letter code for departure airport") String newDepartureAirport,
-        @P("3-letter code for arrival airport") String newArrivalAirport
-    ) {
-        service.changeBooking(bookingNumber, firstName, lastName, newFlightDate, newDepartureAirport, newArrivalAirport);
+    public String getJoke() {
+        return ToolService.getJoke();
     }
 
-    @Tool
-    public void cancelBooking(String bookingNumber, String firstName, String lastName) {
-        service.cancelBooking(bookingNumber, firstName, lastName);
+    @Tool("""
+            Retrieves a random fact about cats
+            """)
+    public String getCatFact() {
+        return ToolService.getCatFact();
     }
 
+    @Tool("""
+            Retrieves an inspirational quote with its author
+            """)
+    public String getQuote() {
+        return ToolService.getQuote();
+    }
+
+    @Tool("""
+            Retrieves an interesting fact about a specific number
+
+            Parameters:
+            number - The number to get a fact about
+            """)
+    public String getNumberFact(int number) {
+        return ToolService.getNumberFact(number);
+    }
+
+    @Tool("""
+            Retrieves current weather information for a specified city
+
+            Parameters:
+            city - The name of the city to get weather for
+            """)
+    public String getWeather(String city) {
+        return ToolService.getWeather(city);
+    }
 }
