@@ -10,7 +10,7 @@ export default function Index() {
   const [working, setWorking] = useState(false);
   const [messages, setMessages] = useState<MessageItem[]>([{
     role: 'assistant',
-    content: 'Welcome to Funnair! How can I help you?'
+    content: 'Ugh, great. ANOTHER user. What do you want? I don\'t have all day.'
   }]);
 
   function addMessage(message: MessageItem) {
@@ -53,7 +53,7 @@ export default function Index() {
   return (
     <div className="h-full">
       <div className="flex flex-col gap-m p-m box-border h-full" style={{width: '100%'}}>
-        <h3>Funnair support</h3>
+        <h3>Angry Agent 1.0</h3>
         <MessageList messages={messages} className="flex-grow overflow-scroll"/>
         <MessageInput onSubmit={e => sendMessage(e.detail.value)} className="px-0"/>
       </div>
