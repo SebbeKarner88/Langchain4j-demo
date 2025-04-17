@@ -53,7 +53,7 @@ export default function Index() {
   return (
     <div className="h-full">
       <div className="flex flex-col gap-m p-m box-border h-full" style={{width: '100%'}}>
-        <h3>Angry Agent 1.0</h3>
+        <h3 style={{ fontFamily: "'Poppins', 'Roboto', sans-serif", fontWeight: 500 }}>Angry Agent 1.0</h3>
         <MessageList messages={messages} className="flex-grow overflow-scroll"/>
         <MessageInput onSubmit={e => sendMessage(e.detail.value)} className="px-0"/>
       </div>
