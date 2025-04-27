@@ -1,6 +1,7 @@
 package org.vaadin.marcus.langchain4j;
 
 import dev.langchain4j.agent.tool.Tool;
+import dev.langchain4j.service.MemoryId;
 import org.springframework.stereotype.Component;
 import org.vaadin.marcus.service.ToolService;
 
@@ -53,5 +54,16 @@ public class  LangChain4jTools {
             """)
     public String getWeather(String city) {
         return ToolService.getWeather(city);
+    }
+
+    @Tool("""
+            Helps the user plan a trip in multiple steps. This tool guides the user through a step-by-step process to plan their trip.
+            Use this tool when the user wants to plan a trip or vacation.
+
+            Parameters:
+            input - The user's response to the current step's question
+            """)
+    public String planTrip(@MemoryId String chatId, String input) {
+        return ToolService.planTripMultiStep(chatId, input);
     }
 }
